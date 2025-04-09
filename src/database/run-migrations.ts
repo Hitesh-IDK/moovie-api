@@ -61,11 +61,6 @@ export const runMigrations = async (reset: boolean = false) => {
       await tempClient.connect();
 
       if (reset) {
-        const isVerified = await verifyResetConfirmation();
-        if (!isVerified) {
-          return;
-        }
-
         await tempClient.query(
           "DROP DATABASE IF EXISTS " + MigrationConfig.database
         );
