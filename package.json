@@ -1,0 +1,35 @@
+{
+  "name": "moovie-api",
+  "version": "1.0.0",
+  "description": "API for moovie app",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.ts",
+    "migrate": "ts-node src/database/run-migrations.ts",
+    "migrate-reset": "ts-node src/database/run-migrations.ts --reset"
+  },
+  "keywords": [
+    "movie"
+  ],
+  "author": "Hitesh-IDK",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/morgan": "^1.9.9",
+    "@types/pg": "^8.11.11",
+    "@types/prompt-sync": "^4.2.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.14.1",
+    "prompt-sync": "^4.2.0",
+    "rotating-file-stream": "^3.2.6"
+  }
+}
