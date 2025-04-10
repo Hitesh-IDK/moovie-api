@@ -25,6 +25,10 @@ export type Errors =
   | "DOESNT_EXIST_ERROR"
   | "INVALID_PARAMETERS";
 
+export interface FunctionResponse {
+  success: boolean;
+  message: string;
+}
 // export interface PaginationQueries {
 //   page?: string;
 // }
