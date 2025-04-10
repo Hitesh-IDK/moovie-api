@@ -5,11 +5,12 @@ import { Client, PoolConfig } from "pg";
 import { config } from "./config";
 import PromptSync from "prompt-sync";
 import { GreenText, RedText, YellowText } from "../util/colored-console";
+import AuthMigrations from "./schema/auth";
 
 const migrations = async (client: Client) => {
   await client.connect();
 
-  // await usersMigration(client);
+  await AuthMigrations(client);
 };
 
 /**
@@ -61,9 +62,7 @@ export const runMigrations = async (reset: boolean = false) => {
       await tempClient.connect();
 
       if (reset) {
-        await tempClient.query(
-          "DROP DATABASE IF EXISTS " + MigrationConfig.database
-        );
+        await tempClient.query("DROP DATABASE IF EXISTS " + MigrationConfig.database);
         console.log("Database dropped! Starting migrations...\n");
       }
 
@@ -104,9 +103,9 @@ const verifyResetConfirmation = async (): Promise<boolean> => {
     const prompt = PromptSync({ sigint: true });
 
     const choice = prompt(
-      `${YellowText(
-        "WARNING: Are you sure you want to reset the database?"
-      )} (${GreenText("y") + "es"}/${RedText("n") + "o"}): `
+      `${YellowText("WARNING: Are you sure you want to reset the database?")} (${GreenText("y") + "es"}/${
+        RedText("n") + "o"
+      }): `
     ).toLowerCase();
     if (choice !== "y" && choice !== "yes") {
       console.log("\nAborting Reset...\n");
