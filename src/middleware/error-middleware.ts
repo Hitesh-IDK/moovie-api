@@ -59,15 +59,17 @@ export default (
   req: Request,
   res: Response,
   next: NextFunction
-): Response => {
+): void => {
   if (err.name === "TokenExpiredError") {
     err = new AppError("Token expired", "AUTHENTICATION_ERROR", 401);
   }
 
   if (process.env.ENVIRONMENT === "production") {
-    return SendProdError(err, res);
+    SendProdError(err, res);
+    return;
   } else {
-    return SendDevError(err, res);
+    SendDevError(err, res);
+    return;
   }
 };
 
